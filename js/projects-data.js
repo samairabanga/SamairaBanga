@@ -1,7 +1,6 @@
-// Central place to edit project content. Each project becomes one
-// "book" on the Projects shelf and one detail page.
-// `cover` points at an image in assets/ — the book render itself
-// (spine, pages, shadow) should already be baked into that image.
+// Central place to edit project content. Each project becomes one row in
+// the Work list on the home page and one detail page. The list order here
+// is the order on the site.
 const PROJECTS = [
   {
     slug: "clodo",
