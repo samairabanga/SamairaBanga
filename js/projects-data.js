@@ -77,7 +77,7 @@ const PROJECTS = [
     slug: "sunrooof",
     title: "SUNROOOF",
     role: "Patented wellness lighting technology",
-    meta: "Brand Marketing Intern",
+    meta: "Brand Marketing",
     // Each entry is a clickable thumbnail (opens the Instagram Reel in a
     // new tab) paired with its own `text` paragraph(s), rendered right
     // next to it in a shared grid row.
