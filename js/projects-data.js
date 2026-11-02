@@ -1,5 +1,5 @@
 // Central place to edit project content. Each project becomes one row in
-// the Work list on the home page and one detail page. The list order here
+// the Projects list on the home page and one detail page. The list order here
 // is the order on the site.
 const PROJECTS = [
   {
@@ -21,7 +21,7 @@ const PROJECTS = [
   {
     slug: "girlsintovc",
     title: "Girls into VC",
-    role: "Closing the gender gap in venture capital",
+    role: "Community of 10k+ women",
     meta: "Regional Lead",
     videos: [
       {

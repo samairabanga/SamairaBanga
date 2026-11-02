@@ -333,7 +333,7 @@
   <h1 class="name rv"><span class="splat">Samaira Banga</span></h1>
   <div class="sub rv"><span class="splat">Economics + Film @&nbsp;Tufts</span><br><span class="splat">&amp; Growth Marketing @&nbsp;Startups</span></div>
   <p class="quote rv"><span class="splat">I obsess over the numbers that make people care.</span></p>
-  <div class="label first rv" id="work">WORK</div>
+  <div class="label first rv" id="work">PROJECTS</div>
   <ul class="work">
     <li class="rv"><a href="#" data-slug="clodo"><span class="num">01</span><div><div class="co">Clodo AI (YC)</div><div class="what">#1 Growth</div></div><span class="arrow">→</span></a></li>
     <li class="rv"><a href="#" data-slug="girlsintovc"><span class="num">02</span><div><div class="co">Girls into VC</div><div class="what">Regional Lead</div></div><span class="arrow">→</span></a></li>
@@ -352,7 +352,7 @@
 
 <script>
 // Central place to edit project content. Each project becomes one row in
-// the Work list on the home page and one detail page. The list order here
+// the Projects list on the home page and one detail page. The list order here
 // is the order on the site.
 const PROJECTS = [
   {
@@ -374,7 +374,7 @@ const PROJECTS = [
   {
     slug: "girlsintovc",
     title: "Girls into VC",
-    role: "Closing the gender gap in venture capital",
+    role: "Community of 10k+ women",
     meta: "Regional Lead",
     videos: [
       {
@@ -566,19 +566,6 @@ const PROJECTS = [
     s.connect(f).connect(g).connect(ctx.destination); s.start(t);
     for (let i = 0; i < 6; i++) burst(t + i * dur / 6, .012, 6, 'bandpass', 2400, 4, .25);   // roller ratchet
   }
-  // quiet room tone so the close-up feels like a real room
-  let roomGain = null;
-  function roomTone() {
-    if (!audio()) return;
-    if (roomGain) { const t = ctx.currentTime; roomGain.gain.cancelScheduledValues(t); roomGain.gain.setValueAtTime(roomGain.gain.value, t); roomGain.gain.linearRampToValueAtTime(.05, t + 1.5); return; }
-    const len = ctx.sampleRate * 3, b = ctx.createBuffer(1, len, ctx.sampleRate), d = b.getChannelData(0);
-    let last = 0; for (let i = 0; i < len; i++) { last = (last + .02 * (Math.random() * 2 - 1)) / 1.02; d[i] = last * 3.5; }
-    const s = ctx.createBufferSource(), f = ctx.createBiquadFilter(); roomGain = ctx.createGain();
-    s.buffer = b; s.loop = true; f.type = 'lowpass'; f.frequency.value = 500;
-    roomGain.gain.setValueAtTime(0, ctx.currentTime); roomGain.gain.linearRampToValueAtTime(.05, ctx.currentTime + 1.5);
-    s.connect(f).connect(roomGain).connect(ctx.destination); s.start();
-  }
-
   // ---------- matcha: tap to shake ----------
   const cupWobble = $('cupWobble');
   function shakeCup(e) {
@@ -629,7 +616,7 @@ const PROJECTS = [
     if (started) return; started = true;
     const my = gen;
     audio(); hint.style.opacity = 0; hintPill.style.opacity = 0; closeStrips();
-    if (reduced) { closeScene.classList.remove('hidden'); overScene.classList.add('hidden'); roomTone(); run(); return; }
+    if (reduced) { closeScene.classList.remove('hidden'); overScene.classList.add('hidden'); run(); return; }
 
     const sc = SCENES.over;
     // aim the camera at the paper in the typewriter (photo px 848, 200)
@@ -660,7 +647,7 @@ const PROJECTS = [
     anim(flash, [{ opacity: 0 }, { opacity: 1, offset: .4 }, { opacity: 0 }], { duration: 520, easing: 'ease-in-out' });
     await sleep(200);
     closeScene.classList.remove('hidden'); overScene.classList.add('hidden');
-    roomTone(); paperFeed(.5);
+    paperFeed(.5);
     anim(closeCam, [
       { transform: 'perspective(900px) rotateX(9deg) scale(1.14) translateY(-2%)', filter: 'blur(9px)' },
       { transform: 'perspective(900px) rotateX(2deg) scale(1.03)', filter: 'blur(2px)', offset: .6 },
@@ -708,7 +695,7 @@ const PROJECTS = [
     leaving = true; gen++;
     scrollCue.classList.remove('show');
     document.body.classList.add('locked'); window.scrollTo(0, 0);
-    if (ctx) { carriage(ctx.currentTime); if (roomGain) roomGain.gain.linearRampToValueAtTime(0, ctx.currentTime + .6); }
+    if (ctx) carriage(ctx.currentTime);
     if (!reduced) { anim(flash, [{ opacity: 0 }, { opacity: 1, offset: .4 }, { opacity: 0 }], { duration: 520, easing: 'ease-in-out' }); await sleep(200); }
     [overCam, vignette, typed, closeCam].forEach(el => { try { el.getAnimations().forEach(a => a.cancel()); } catch (e) {} });
     typed.innerHTML = '';
@@ -777,7 +764,7 @@ const PROJECTS = [
       <p class="d-tag">${p.tagline || p.role || ''}</p>
       ${figs.length ? `<div class="media">${figs.join('')}</div>` : ''}
       ${body.length ? `<div class="d-body">${paras(body)}</div>` : ''}
-      <div class="d-next"><button class="back" type="button" data-back>← All work</button><button class="back" type="button" data-go="${(i + 1) % PROJECTS.length}">${nx.title} →</button></div>
+      <div class="d-next"><button class="back" type="button" data-back>← All projects</button><button class="back" type="button" data-go="${(i + 1) % PROJECTS.length}">${nx.title} →</button></div>
       <footer class="foot">&copy; 2026 Samaira Banga</footer>`;
     home.hidden = true; pv.hidden = false;
     pv.classList.remove('pv-in'); void pv.offsetWidth; if (!reduced) pv.classList.add('pv-in');
