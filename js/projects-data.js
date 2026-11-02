@@ -13,7 +13,7 @@ const PROJECTS = [
       {
         images: ["assets/clodo-1.png", "assets/clodo-2.png"],
         text: [
-          "Created Founder-Led content on LinkedIn for <a class=\"inline-link\" href=\"https://www.linkedin.com/in/sidharthrajaram/\" target=\"_blank\" rel=\"noopener noreferrer\">@Sidrajaram</a> and <a class=\"inline-link\" href=\"https://www.linkedin.com/in/rithvikchuppala/\" target=\"_blank\" rel=\"noopener noreferrer\">@RithvikChuppala</a>, growing from 0 to 2M+ impressions and 0 to $40k revenue."
+          "Created Founder-Led content on LinkedIn for <a class=\"inline-link\" href=\"https://www.linkedin.com/in/sidharthrajaram/\" target=\"_blank\" rel=\"noopener noreferrer\">@Sidrajaram</a> and <a class=\"inline-link\" href=\"https://www.linkedin.com/in/rithvikchuppala/\" target=\"_blank\" rel=\"noopener noreferrer\">@RithvikChuppala</a>, growing from 0 to 2M+ impressions and adding $50k in MRR."
         ]
       }
     ]
