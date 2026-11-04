@@ -213,7 +213,12 @@
   .q-text { font-size: clamp(1.1rem, 1.9vw, 1.4rem); color: var(--ink-soft); margin-top: .5rem; }
   .q-bullets { margin: .8rem 0 0 1.1rem; font-size: clamp(1.05rem, 1.8vw, 1.3rem); line-height: 1.55; }
   .q-bullets li + li { margin-top: .35rem; }
-  .quests .media { margin-top: 1.8rem; }
+  .quests .media { margin-top: 1.8rem; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .quests .media figure.wide { grid-column: 1 / -1; }
+  .q-title a { color: inherit; text-decoration: none; }
+  .q-title a:hover { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+  .q-visit { display: inline-block; margin-top: 1rem; font-family: var(--mono); font-weight: 700; font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; }
+  .q-visit:hover { color: var(--ink); }
   @media (max-width: 640px) { .quests > li { grid-template-columns: 2.6rem 1fr; } }
   .d-next { display: flex; justify-content: space-between; gap: 1rem; margin-top: 5rem; font-family: var(--mono); font-weight: 700; font-size: .9rem; letter-spacing: .2em; text-transform: uppercase; }
   .pv-in { animation: pvin .5s ease; }
@@ -457,7 +462,17 @@ const PROJECTS = [
     // Each quest: a title, a one-line description, optional bullets and
     // optional media (same shape as videos/photos above).
     quests: [
-      { title: "Resolution", text: "AI companion on iMessage", bullets: ["1,000+ beta users launched at Harvard, Duke, UT Austin, Boston U &amp; Tufts"] },
+      {
+        title: "Resolution",
+        text: "AI companion on iMessage",
+        bullets: ["1,000+ beta users launched at Harvard, Duke, UT Austin, Boston U &amp; Tufts"],
+        url: "https://withresolution.com/",
+        photos: [
+          { image: "assets/resolution-1.jpg", wide: true },
+          { image: "assets/resolution-2.jpg" },
+          { image: "assets/resolution-3.jpg" }
+        ]
+      },
       { title: "Hackathons", bullets: ["Won #1 growth games Dex by Third Layer", "Judged Res hacks at Harvard", "Vibe Coding Hackathon, Ruth AI New York"] },
       { title: "JumboVentures", text: "Building startup culture at Tufts" },
       { title: "Fire Fire", text: "2 Michelin chef restaurant launch" },
@@ -775,9 +790,9 @@ const PROJECTS = [
   const home = $('portfolio-content'), pv = $('project-view');
   const pad = n => String(n).padStart(2, '0');
   const paras = arr => (arr || []).map(t => `<p>${t}</p>`).join('');
-  function fig({ image, url, text, tall, wide }) {
-    const site = url && /instagram\.com/.test(url) ? 'Instagram' : 'LinkedIn';
-    const cap = paras(text) + (url ? `<a class="view" href="${url}" target="_blank" rel="noopener noreferrer">View on ${site} →</a>` : '');
+  function fig({ image, url, text, tall, wide, noview }) {
+    const site = !url ? '' : /instagram\.com/.test(url) ? 'Instagram' : /linkedin\.com/.test(url) ? 'LinkedIn' : new URL(url).hostname.replace(/^www\./, '');
+    const cap = paras(text) + (url && !noview ? `<a class="view" href="${url}" target="_blank" rel="noopener noreferrer">View on ${site} →</a>` : '');
     const img = `<img src="${image}" alt="" loading="lazy">`;
     const media = url ? `<a class="media-link" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="View on ${site}">${img}</a>` : img;
     return `<figure class="${tall ? 'tall' : ''} ${wide ? 'wide' : ''}">${media}${cap ? `<figcaption>${cap}</figcaption>` : ''}</figure>`;
@@ -798,7 +813,7 @@ const PROJECTS = [
       <p class="d-tag">${p.tagline || p.role || ''}</p>
       ${figs.length ? `<div class="media">${figs.join('')}</div>` : ''}
       ${body.length ? `<div class="d-body">${paras(body)}</div>` : ''}
-      ${(p.quests || []).length ? `<ol class="quests">${p.quests.map((q, k) => `<li><span class="num">${pad(k + 1)}</span><div><h2 class="q-title">${q.title}</h2>${q.text ? `<p class="q-text">${q.text}</p>` : ''}${(q.bullets || []).length ? `<ul class="q-bullets">${q.bullets.map(x => `<li>${x}</li>`).join('')}</ul>` : ''}${[...(q.photos || []).map(x => fig({ image: x.image, url: x.url, text: x.caption ? [x.caption] : [], wide: true })), ...(q.videos || []).map(v => fig({ image: v.thumbnail, url: v.url, text: v.text, tall: true }))].length ? `<div class="media">${[...(q.photos || []).map(x => fig({ image: x.image, url: x.url, text: x.caption ? [x.caption] : [], wide: true })), ...(q.videos || []).map(v => fig({ image: v.thumbnail, url: v.url, text: v.text, tall: true }))].join('')}</div>` : ''}</div></li>`).join('')}</ol>` : ''}
+      ${(p.quests || []).length ? `<ol class="quests">${p.quests.map((q, k) => `<li><span class="num">${pad(k + 1)}</span><div><h2 class="q-title">${q.url ? `<a href="${q.url}" target="_blank" rel="noopener noreferrer">${q.title}</a>` : q.title}</h2>${q.text ? `<p class="q-text">${q.text}</p>` : ''}${(q.bullets || []).length ? `<ul class="q-bullets">${q.bullets.map(x => `<li>${x}</li>`).join('')}</ul>` : ''}${q.url ? `<a class="q-visit" href="${q.url}" target="_blank" rel="noopener noreferrer">Visit ${new URL(q.url).hostname.replace(/^www\./, '')} →</a>` : ''}${[...(q.photos || []).map(x => fig({ image: x.image, url: x.url || q.url, text: x.caption ? [x.caption] : [], wide: x.wide, noview: !!q.url })), ...(q.videos || []).map(v => fig({ image: v.thumbnail, url: v.url, text: v.text, tall: true }))].length ? `<div class="media">${[...(q.photos || []).map(x => fig({ image: x.image, url: x.url || q.url, text: x.caption ? [x.caption] : [], wide: x.wide, noview: !!q.url })), ...(q.videos || []).map(v => fig({ image: v.thumbnail, url: v.url, text: v.text, tall: true }))].join('')}</div>` : ''}</div></li>`).join('')}</ol>` : ''}
       <div class="d-next"><button class="back" type="button" data-back>← All projects</button><button class="back" type="button" data-go="${(i + 1) % PROJECTS.length}">${nx.title} →</button></div>
       <footer class="foot">&copy; 2026 Samaira Banga</footer>`;
     home.hidden = true; pv.hidden = false;
