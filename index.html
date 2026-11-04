@@ -205,26 +205,32 @@
   .media a.view:hover { color: var(--ink); }
   .d-body { margin-top: 3rem; font-size: clamp(1.1rem, 1.9vw, 1.45rem); line-height: 1.6; max-width: 46ch; }
   .d-body p + p { margin-top: 1rem; }
-  .quests { list-style: none; margin-top: 3.5rem; }
-  .quests > li { display: grid; grid-template-columns: 4rem 1fr; padding: 2rem 0; border-top: 1px solid rgba(31,28,25,.18); }
-  .quests > li:last-child { border-bottom: 1px solid rgba(31,28,25,.18); }
+  .quests { list-style: none; margin-top: 3.5rem; border-bottom: 1px solid rgba(31,28,25,.18); }
+  .quests > li { border-top: 1px solid rgba(31,28,25,.18); }
+  .quests summary { list-style: none; display: grid; grid-template-columns: 4rem 1fr auto; align-items: start; padding: 1.8rem 0; cursor: pointer; }
+  .quests summary::-webkit-details-marker { display: none; }
+  .q-static { display: grid; grid-template-columns: 4rem 1fr auto; align-items: start; padding: 1.8rem 0; }
   .quests .num { font-family: var(--mono); font-size: 1.15rem; color: var(--ink-soft); padding-top: .35rem; }
-  .q-title { font-family: var(--fell); font-weight: 400; font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1.1; }
-  .q-text { font-size: clamp(1.1rem, 1.9vw, 1.4rem); color: var(--ink-soft); margin-top: .5rem; }
-  .q-bullets { margin: .8rem 0 0 1.1rem; font-size: clamp(1.05rem, 1.8vw, 1.3rem); line-height: 1.55; }
+  .q-head { display: block; }
+  .q-title { display: block; font-family: var(--fell); font-weight: 400; font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1.1; }
+  .quests summary:hover .q-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+  .q-text { display: block; font-size: clamp(1.1rem, 1.9vw, 1.4rem); color: var(--ink-soft); margin-top: .5rem; }
+  .q-toggle { position: relative; width: 1.4rem; height: 1.4rem; margin-top: .6rem; }
+  .q-toggle::before, .q-toggle::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--ink); transition: transform .25s ease; }
+  .q-toggle::after { transform: rotate(90deg); }
+  details[open] .q-toggle::after { transform: rotate(0); }
+  .q-body { padding: 0 0 2rem 4rem; }
+  .q-bullets { margin: 0 0 0 1.1rem; font-size: clamp(1.05rem, 1.8vw, 1.3rem); line-height: 1.55; }
   .q-bullets li + li { margin-top: .35rem; }
   .q-bullets a { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
   .q-bullets .media { margin-top: 1.2rem; }
   .q-bullets a.q-visit { text-decoration: none; color: var(--ink-soft); }
-  .q-bullets .media img { aspect-ratio: auto; }
-  .quests .media { margin-top: 1.8rem; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .quests .media { margin-top: 1.4rem; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
   .quests .media figure.wide { grid-column: 1 / -1; }
   .quests .media figure.sq img { aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 80%; }
-  .q-title a { color: inherit; text-decoration: none; }
-  .q-title a:hover { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
   .q-visit { display: inline-block; margin-top: 1rem; font-family: var(--mono); font-weight: 700; font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; }
   .q-visit:hover { color: var(--ink); }
-  @media (max-width: 640px) { .quests > li { grid-template-columns: 2.6rem 1fr; } }
+  @media (max-width: 640px) { .quests summary, .q-static { grid-template-columns: 2.6rem 1fr auto; } .q-body { padding-left: 2.6rem; } }
   .d-next { display: flex; justify-content: space-between; gap: 1rem; margin-top: 5rem; font-family: var(--mono); font-weight: 700; font-size: .9rem; letter-spacing: .2em; text-transform: uppercase; }
   .pv-in { animation: pvin .5s ease; }
   @keyframes pvin { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
@@ -467,18 +473,6 @@ const PROJECTS = [
     // Each quest: a title, a one-line description, optional bullets and
     // optional media (same shape as videos/photos above).
     quests: [
-      {
-        title: "Resolution",
-        text: "AI companion on iMessage",
-        bullets: ["1,000+ beta users launched at Harvard, Duke, UT Austin, Boston U &amp; Tufts"],
-        url: "https://withresolution.com/",
-        hideVisit: true,
-        photos: [
-          { image: "assets/resolution-1.jpg", wide: true },
-          { image: "assets/resolution-2.jpg" },
-          { image: "assets/resolution-3.jpg" }
-        ]
-      },
       { title: "Hackathons", bullets: ["Won #1 growth games Dex by Third Layer", "Judged Res hacks at Harvard", {
           prefix: "Hosted ",
           text: "Vibe Coding Hackathon, Ruth AI New York",
@@ -497,6 +491,18 @@ const PROJECTS = [
           { image: "assets/jumbo-1.jpg", wide: true },
           { image: "assets/jumbo-2.jpg", cls: "sq" },
           { image: "assets/jumbo-3.jpg", cls: "sq" }
+        ]
+      },
+      {
+        title: "Resolution",
+        text: "AI companion on iMessage",
+        bullets: ["1,000+ beta users launched at Harvard, Duke, UT Austin, Boston U &amp; Tufts"],
+        url: "https://withresolution.com/",
+        hideVisit: true,
+        photos: [
+          { image: "assets/resolution-1.jpg", wide: true },
+          { image: "assets/resolution-2.jpg" },
+          { image: "assets/resolution-3.jpg" }
         ]
       },
       { title: "Fire Fire", text: "2 Michelin chef restaurant launch" },
@@ -814,6 +820,27 @@ const PROJECTS = [
     const media = url ? `<a class="media-link" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="View on ${site}">${img}</a>` : img;
     return `<figure class="${tall ? 'tall' : ''} ${wide ? 'wide' : ''} ${cls || ''}">${media}${cap ? `<figcaption>${cap}</figcaption>` : ''}</figure>`;
   }
+  const linkLabel = u => /linkedin\.com|lnkd\.in/.test(u) ? 'View on LinkedIn' : /instagram\.com/.test(u) ? 'View on Instagram' : 'Visit ' + new URL(u).hostname.replace(/^www\./, '');
+  const ext = (u, inner, cls) => `<a${cls ? ` class="${cls}"` : ''} href="${u}" target="_blank" rel="noopener noreferrer">${inner}</a>`;
+  function questMedia(photos, videos, url) {
+    const figs = [
+      ...(photos || []).map(x => fig({ image: x.image, url: x.url || url, text: x.caption ? [x.caption] : [], wide: x.wide, cls: x.cls, noview: !!url })),
+      ...(videos || []).map(v => fig({ image: v.thumbnail, url: v.url, text: v.text, tall: true }))
+    ];
+    return figs.length ? `<div class="media">${figs.join('')}</div>` : '';
+  }
+  function questsHTML(quests) {
+    if (!(quests || []).length) return '';
+    return `<ol class="quests">${quests.map((q, k) => {
+      const bullets = (q.bullets || []).length ? `<ul class="q-bullets">${q.bullets.map(x => typeof x === 'string' ? `<li>${x}</li>` :
+        `<li>${x.prefix || ''}${x.url ? ext(x.url, x.text) : x.text}${questMedia(x.photos, null, x.url)}${x.url && (x.photos || []).length ? ext(x.url, linkLabel(x.url) + ' →', 'q-visit') : ''}</li>`).join('')}</ul>` : '';
+      const visit = q.url && !q.hideVisit ? ext(q.url, linkLabel(q.url) + ' →', 'q-visit') : '';
+      const inner = bullets + visit + questMedia(q.photos, q.videos, q.url);
+      const head = `<span class="num">${pad(k + 1)}</span><span class="q-head"><span class="q-title">${q.title}</span>${q.text ? `<span class="q-text">${q.text}</span>` : ''}</span>`;
+      if (!inner) return `<li><div class="q-static">${head}</div></li>`;
+      return `<li><details><summary><span class="num">${pad(k + 1)}</span><span class="q-head"><span class="q-title">${q.title}</span>${q.text ? `<span class="q-text">${q.text}</span>` : ''}</span><span class="q-toggle" aria-hidden="true"></span></summary><div class="q-body">${bullets}${visit}${questMedia(q.photos, q.videos, q.url)}</div></details></li>`;
+    }).join('')}</ol>`;
+  }
   function openProject(i) {
     const p = PROJECTS[i]; if (!p) return;
     const figs = [
@@ -830,7 +857,7 @@ const PROJECTS = [
       <p class="d-tag">${p.tagline || p.role || ''}</p>
       ${figs.length ? `<div class="media">${figs.join('')}</div>` : ''}
       ${body.length ? `<div class="d-body">${paras(body)}</div>` : ''}
-      ${(p.quests || []).length ? `<ol class="quests">${p.quests.map((q, k) => `<li><span class="num">${pad(k + 1)}</span><div><h2 class="q-title">${q.url ? `<a href="${q.url}" target="_blank" rel="noopener noreferrer">${q.title}</a>` : q.title}</h2>${q.text ? `<p class="q-text">${q.text}</p>` : ''}${(q.bullets || []).length ? `<ul class="q-bullets">${q.bullets.map(x => typeof x === 'string' ? `<li>${x}</li>` : `<li>${x.prefix || ''}${x.url ? `<a href="${x.url}" target="_blank" rel="noopener noreferrer">${x.text}</a>` : x.text}${(x.photos || []).length ? `<div class="media">${x.photos.map(ph => fig({ image: ph.image, url: ph.url || x.url, wide: ph.wide, noview: true })).join('')}</div>${x.url ? `<a class="q-visit" href="${x.url}" target="_blank" rel="noopener noreferrer">View on ${/linkedin\.com|lnkd\.in/.test(x.url) ? 'LinkedIn' : new URL(x.url).hostname.replace(/^www\./, '')} →</a>` : ''}` : ''}</li>`).join('')}</ul>` : ''}${q.url && !q.hideVisit ? `<a class="q-visit" href="${q.url}" target="_blank" rel="noopener noreferrer">${/linkedin\.com|lnkd\.in/.test(q.url) ? 'View on LinkedIn' : /instagram\.com/.test(q.url) ? 'View on Instagram' : 'Visit ' + new URL(q.url).hostname.replace(/^www\./, '')} →</a>` : ''}${[...(q.photos || []).map(x => fig({ image: x.image, url: x.url || q.url, text: x.caption ? [x.caption] : [], wide: x.wide, cls: x.cls, noview: !!q.url })), ...(q.videos || []).map(v => fig({ image: v.thumbnail, url: v.url, text: v.text, tall: true }))].length ? `<div class="media">${[...(q.photos || []).map(x => fig({ image: x.image, url: x.url || q.url, text: x.caption ? [x.caption] : [], wide: x.wide, cls: x.cls, noview: !!q.url })), ...(q.videos || []).map(v => fig({ image: v.thumbnail, url: v.url, text: v.text, tall: true }))].join('')}</div>` : ''}</div></li>`).join('')}</ol>` : ''}
+      ${questsHTML(p.quests)}
       <div class="d-next"><button class="back" type="button" data-back>← All projects</button><button class="back" type="button" data-go="${(i + 1) % PROJECTS.length}">${nx.title} →</button></div>
       <footer class="foot">&copy; 2026 Samaira Banga</footer>`;
     home.hidden = true; pv.hidden = false;
