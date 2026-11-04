@@ -470,7 +470,6 @@ const PROJECTS = [
     title: "Sidequests",
     heading: "Sidequests",
     kicker: "Launches, hackathons & more",
-    tagline: "The things I build and show up for outside the main quest.",
     meta: "Launches, hackathons & more",
     // Each quest: a title, a one-line description, optional bullets and
     // optional media (same shape as videos/photos above).
@@ -856,7 +855,7 @@ const PROJECTS = [
       <div class="topbar"><button class="back" type="button" data-back>← Samaira Banga</button><span>${pad(i + 1)} / ${pad(PROJECTS.length)}</span></div>
       <h1 class="d-title">${p.heading || p.title}</h1>
       ${p.kicker || p.meta ? `<div class="d-kicker">${p.kicker || p.meta}</div>` : ''}
-      <p class="d-tag">${p.tagline || p.role || ''}</p>
+      ${p.tagline || p.role ? `<p class="d-tag">${p.tagline || p.role}</p>` : ''}
       ${figs.length ? `<div class="media">${figs.join('')}</div>` : ''}
       ${body.length ? `<div class="d-body">${paras(body)}</div>` : ''}
       ${p.url ? `<a class="q-visit d-visit" href="${p.url}" target="_blank" rel="noopener noreferrer">${linkLabel(p.url)} →</a>` : ''}
