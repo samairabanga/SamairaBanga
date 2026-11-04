@@ -5,7 +5,7 @@ const PROJECTS = [
   {
     slug: "clodo",
     title: "Clodo AI (YC)",
-    role: "Backed by Y Combinator — planet scale people sourcing",
+    role: "Planet scale people sourcing",
     meta: "#1 Growth",
     // Numbered sections: an optional heading, a row of images (max 2 per
     // row), then a shared caption below the whole row.

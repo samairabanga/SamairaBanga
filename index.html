@@ -230,6 +230,7 @@
   .quests .media figure.sq img { aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 80%; }
   .q-visit { display: inline-block; margin-top: 1rem; font-family: var(--mono); font-weight: 700; font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; }
   .q-visit:hover { color: var(--ink); }
+  .d-visit { margin-top: 1.6rem; }
   @media (max-width: 640px) { .quests summary, .q-static { grid-template-columns: 2.6rem 1fr auto; } .q-body { padding-left: 2.6rem; } }
   .d-next { display: flex; justify-content: space-between; gap: 1rem; margin-top: 5rem; font-family: var(--mono); font-weight: 700; font-size: .9rem; letter-spacing: .2em; text-transform: uppercase; }
   .pv-in { animation: pvin .5s ease; }
@@ -395,7 +396,8 @@ const PROJECTS = [
   {
     slug: "clodo",
     title: "Clodo AI (YC)",
-    role: "Backed by Y Combinator — planet scale people sourcing",
+    role: "Planet scale people sourcing",
+    url: "https://clodo.ai/",
     meta: "#1 Growth",
     // Numbered sections: an optional heading, a row of images (max 2 per
     // row), then a shared caption below the whole row.
@@ -846,7 +848,7 @@ const PROJECTS = [
     const figs = [
       ...(p.photos || []).map(x => fig({ image: x.image, url: x.url, text: x.caption ? [x.caption] : [], wide: true })),
       ...(p.videos || []).map(v => fig({ image: v.thumbnail, url: v.url, text: v.text, tall: true })),
-      ...(p.sections || []).flatMap(s => (s.images || []).map(src => fig({ image: src })))
+      ...(p.sections || []).flatMap(s => (s.images || []).map(src => fig({ image: src, url: p.url, noview: true })))
     ];
     const body = (p.sections || []).flatMap(s => s.text || []);
     const nx = PROJECTS[(i + 1) % PROJECTS.length];
@@ -857,6 +859,7 @@ const PROJECTS = [
       <p class="d-tag">${p.tagline || p.role || ''}</p>
       ${figs.length ? `<div class="media">${figs.join('')}</div>` : ''}
       ${body.length ? `<div class="d-body">${paras(body)}</div>` : ''}
+      ${p.url ? `<a class="q-visit d-visit" href="${p.url}" target="_blank" rel="noopener noreferrer">${linkLabel(p.url)} →</a>` : ''}
       ${questsHTML(p.quests)}
       <div class="d-next"><button class="back" type="button" data-back>← All projects</button><button class="back" type="button" data-go="${(i + 1) % PROJECTS.length}">${nx.title} →</button></div>
       <footer class="foot">&copy; 2026 Samaira Banga</footer>`;
