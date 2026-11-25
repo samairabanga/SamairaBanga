@@ -22,7 +22,7 @@ const PROJECTS = [
     slug: "girlsintovc",
     title: "Girls into VC",
     role: "Community of 10k+ women",
-    meta: "Regional Lead",
+    meta: "Community Growth",
     videos: [
       {
         thumbnail: "assets/girlsintovc-photo-1.jpg",
