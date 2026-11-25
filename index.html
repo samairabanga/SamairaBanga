@@ -192,6 +192,8 @@
   .back:hover { color: var(--ink-soft); }
   .d-title { font-family: var(--fell); font-weight: 400; font-size: clamp(3rem, 8vw, 6.4rem); line-height: 1; }
   .d-kicker { font-family: var(--mono); font-weight: 700; font-size: .95rem; letter-spacing: .2em; text-transform: uppercase; margin-top: 1.6rem; }
+  .d-site { display: inline-block; margin-top: 1.2rem; font-family: var(--mono); font-weight: 700; font-size: .85rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink); text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+  .d-site:hover { color: var(--ink-soft); }
   .d-tag { font-size: clamp(1.15rem, 2vw, 1.55rem); line-height: 1.5; margin-top: 1.4rem; max-width: 46ch; color: var(--ink-soft); }
   .media { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 3rem 2.2rem; margin-top: 3.5rem; }
   .media figure { margin: 0; }
@@ -413,6 +415,7 @@ const PROJECTS = [
   {
     slug: "girlsintovc",
     title: "Girls into VC",
+    site: "https://www.girlsintovc.com",
     role: "Community of 10k+ women",
     meta: "Community Growth",
     videos: [
@@ -457,6 +460,7 @@ const PROJECTS = [
   {
     slug: "massai",
     title: "Mass AI Coalition",
+    site: "https://massaicoalition.com",
     heading: "Mass AI Coalition",
     kicker: "Growth hacking",
     tagline: "Boston Events",
@@ -873,6 +877,7 @@ const PROJECTS = [
       <h1 class="d-title">${p.heading || p.title}</h1>
       ${p.kicker || p.meta ? `<div class="d-kicker">${p.kicker || p.meta}</div>` : ''}
       ${p.tagline || p.role ? `<p class="d-tag">${p.tagline || p.role}</p>` : ''}
+      ${p.site ? `<a class="d-site" href="${p.site}" target="_blank" rel="noopener noreferrer">${p.site.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')} →</a>` : ''}
       ${figs.length ? `<div class="media">${figs.join('')}</div>` : ''}
       ${body.length ? `<div class="d-body">${paras(body)}</div>` : ''}
       ${p.url ? `<a class="q-visit d-visit" href="${p.url}" target="_blank" rel="noopener noreferrer">${linkLabel(p.url)} →</a>` : ''}
