@@ -44,8 +44,8 @@ const PROJECTS = [
   },
   {
     slug: "whoop",
-    title: "Whoop / Gamma",
-    heading: "Whoop / Gamma",
+    title: "Whoop & Gamma",
+    heading: "Whoop & Gamma",
     kicker: "Campaigns",
     meta: "Campaigns",
     photos: [
@@ -58,12 +58,6 @@ const PROJECTS = [
         image: "assets/gamma.jpg",
         url: "https://www.linkedin.com/feed/update/urn:li:activity:7478933854884425728/",
         caption: "<strong>GAMMA</strong><br>Campaign: 3 perspectives on creativity and communication with AI"
-      }
-    ],
-    videos: [
-      {
-        thumbnail: "assets/mass-ai-reel.jpg",
-        url: "https://www.instagram.com/p/Df3cFQEO40o/"
       }
     ]
   },
