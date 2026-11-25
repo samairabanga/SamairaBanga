@@ -44,40 +44,26 @@ const PROJECTS = [
   },
   {
     slug: "whoop",
-    title: "Mass AI Coalition",
-    // Optional project-page header: heading, small label, one-line tagline.
-    heading: "Mass AI Coalition",
-    kicker: "Private sector initiative to make Mass lead in AI",
-    tagline: "Retaining Boston's top talent in Mass",
-    role: "Private sector initiative to make Mass lead in AI",
-    meta: "Private sector initiative to make Mass lead in AI",
-    // Full-width horizontal photo, clickable.
+    title: "Whoop / Gamma",
+    heading: "Whoop / Gamma",
+    kicker: "Campaigns",
+    meta: "Campaigns",
     photos: [
       {
         image: "assets/whoop.jpg",
         url: "https://www.linkedin.com/feed/update/urn:li:activity:7473116035550736384/",
-        caption: "<strong>WHOOP</strong><br>Campaign"
+        caption: "<strong>WHOOP</strong><br>Campaign with Mass AI Coalition: retaining Boston's top talent in Mass"
+      },
+      {
+        image: "assets/gamma.jpg",
+        url: "https://www.linkedin.com/feed/update/urn:li:activity:7478933854884425728/",
+        caption: "<strong>GAMMA</strong><br>Campaign: 3 perspectives on creativity and communication with AI"
       }
     ],
-    // Reel, shown after the WHOOP campaign.
     videos: [
       {
         thumbnail: "assets/mass-ai-reel.jpg",
         url: "https://www.instagram.com/p/Df3cFQEO40o/"
-      }
-    ]
-  },
-  {
-    slug: "gamma",
-    title: "GAMMA",
-    heading: "Gamma",
-    tagline: "3 Perspectives on creativity and communication with AI",
-    role: "AI powered presentations",
-    meta: "Campaign",
-    photos: [
-      {
-        image: "assets/gamma.jpg",
-        url: "https://www.linkedin.com/feed/update/urn:li:activity:7478933854884425728/"
       }
     ]
   },
