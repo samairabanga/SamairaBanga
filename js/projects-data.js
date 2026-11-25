@@ -44,18 +44,26 @@ const PROJECTS = [
   },
   {
     slug: "whoop",
-    title: "WHOOP",
+    title: "Mass AI Coalition",
     // Optional project-page header: heading, small label, one-line tagline.
-    heading: "Whoop X Mass AI Coalition",
-    kicker: "Community Campaign",
+    heading: "Mass AI Coalition",
+    kicker: "Private sector initiative to make Mass lead in AI",
     tagline: "Retaining Boston's top talent in Mass",
-    role: "Wearable fitness and health platform",
-    meta: "Community campaign",
+    role: "Private sector initiative to make Mass lead in AI",
+    meta: "Private sector initiative to make Mass lead in AI",
     // Full-width horizontal photo, clickable.
     photos: [
       {
         image: "assets/whoop.jpg",
-        url: "https://www.linkedin.com/feed/update/urn:li:activity:7473116035550736384/"
+        url: "https://www.linkedin.com/feed/update/urn:li:activity:7473116035550736384/",
+        caption: "<strong>WHOOP</strong><br>Campaign"
+      }
+    ],
+    // Reel, shown after the WHOOP campaign.
+    videos: [
+      {
+        thumbnail: "assets/mass-ai-reel.jpg",
+        url: "https://www.instagram.com/p/Df3cFQEO40o/"
       }
     ]
   },
