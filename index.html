@@ -679,13 +679,13 @@ const PROJECTS = [
 
   // ---------- the immersive move from desk to paper ----------
   let started = false;
-  // clicking the typewriter now jumps straight to the projects list
+  // clicking the typewriter now jumps straight to the top of the portfolio page
   function start(e) {
     if (e) e.preventDefault();
     audio(); closeStrips(); paperFeed(.6);
     if (!pv.hidden) { pv.hidden = true; home.hidden = false; }
     document.body.classList.remove('locked');
-    $('work').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    $('sheet').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
   }
   // the original zoom-into-the-paper intro, kept here but no longer used
   async function startCloseUp(e) {
